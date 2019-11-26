@@ -62,12 +62,12 @@ window.onload = function() {
         $.ajax({
             type:'post',
             data: { 'idMeal':idMeal },
-            url: 'http://localhost:8080/deleteList',
+            url: 'https://foodiepg.herokuapp.com/deleteList',
     
             complete:function(){
               alert('Delete favourite')
             //   location.reload();
-              window.location.href="http://localhost:8080/userList";
+              window.location.href="https://foodiepg.herokuapp.com/userList";
             }
         })
     }
