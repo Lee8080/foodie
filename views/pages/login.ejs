@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <% include ../partials/header.ejs %>
+    </head>
+    <body style="background-image: linear-gradient(to bottom right,#78ECFC, #78A7FC);">
+        <div class="container"> 
+            <div class="col-sm-4 col-sm-offset-4 well" style="margin-top:50px;">
+                <h3 style="text-align: center;">Foodie Login Page</h3>
+                <form action="signin" method="POST">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Enter Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" aria-describedby="emailHelp" placeholder="Enter Passowrd" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

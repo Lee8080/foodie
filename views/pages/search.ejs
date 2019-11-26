@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+
+<% include ../partials/nav.ejs %>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Meal ID</th>
+            <th scope="col">Meal Image</th>
+            <th scope="col">Meal</th>
+            <th scope="col">Meal Instruction</th>
+            <th scope="col">Meal Ingredient</th>
+            <th scope="col">Meal Youtube</th>
+            <% if(username != null){%>  
+            <th scope="col">Action</th>
+            <% } %>
+          </tr>
+        </thead>
+        <tbody>
+            <%for(x=0;x<food.length;x++){%>
+                <tr>
+                    <td><%= food[x][0].idMeal %></td>
+                    <td><img src="<%= food[x][0].strMealThumb %>" height="100" width="100"></td>
+                    <td><%= food[x][0].strMeal %></td>
+                    <td><%= food[x][0].strInstructions %></td>
+                    <td>
+                        <%for(y=0;y<food[x][0].strIngredient.length;y++){%>
+                            <% if((food[x][0].strIngredient[y]) != ' ' && (food[x][0].strIngredient[y]) != null && (food[x][0].strIngredient[y]) != 'null null'){%>
+                                <p><%= food[x][0].strIngredient[y] %></p>       
+                            <%}%> 
+                        <%}%>
+                    </td>
+                    <td><iframe width="300" height="150" src='<%= (food[x][0].strYoutube).replace('watch?v=','embed/') %>'></iframe></td>
+                    <% if(username != null){%>  
+                    <td><button class="btn btn-primary" onclick="addFav('<%= food[x][0].idMeal %>')">Add</button></td>
+                    <% } %>
+                </tr>
+            <%}%>
+            
+        </tbody>
+      </table>               
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+    function addFav(idMeal){
+        $.ajax({
+            type:'post',
+            data: { 'idMeal':idMeal },
+            url: 'http://localhost:8080/addList',
+    
+            success:function(){
+              alert('Added to favourite')
+            }
+        })
+    }
+</script>

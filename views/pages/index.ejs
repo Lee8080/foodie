@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+<% include ../partials/nav.ejs %>
+<div class="container">
+    <div class="col-sm-4 col-sm-offset-4 well" style="margin-top:30px;">
+        <h3 style="text-align: center;">Recipe Search</h3>
+        <form action="/search" method="post" class="form-inline">
+                <div class="form-group">
+                        <input class="form-control" type="text" placeholder="Search" aria-label="Search" name="search" required>    
+                        <button class="btn btn-primary" type="submit">Search</button>
+                    </div>
+                </div>
+            </div>
+        </form>  
+    </div>         
+</div>
+
+</body>
+</html>
+
+

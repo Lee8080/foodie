@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/header.ejs %>
+</head>
+<body>
+        <% include ../partials/nav.ejs %>  
+<div class="container">
+
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Meal ID</th>
+            <th scope="col">Meal Image</th>
+            <th scope="col">Meal</th>
+            <th scope="col">Meal Instruction</th>
+            <th scope="col">Meal Ingredient</th>
+            <th scope="col">Meal Youtube</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% if(foods != null){ %>
+            <%for(x=0;x<foods.length;x++){console.log(foods);%>
+                <tr>
+                    <td><%= foods[x][0].idMeal %></td>
+                    <td><img src="<%= foods[x][0].strMealThumb %>" height="100" width="100"></td>
+                    <td><%= foods[x][0].strMeal %></td>
+                    <td><%= foods[x][0].strInstructions %></td>
+                    <td>
+                        <%for(y=0;y<foods[x][0].strIngredient.length;y++){%>
+                            <% if((foods[x][0].strIngredient[y]) != ' ' && (foods[x][0].strIngredient[y]) != null && (foods[x][0].strIngredient[y]) != 'null null'){%>
+                                <p><%= foods[x][0].strIngredient[y] %></p>       
+                            <%}%> 
+                        <%}%>
+                    </td>
+                    <td><iframe width="300" height="150" src='<%= (foods[x][0].strYoutube).replace('watch?v=','embed/') %>'></iframe></td>
+                    <td><button class="btn btn-danger" onclick="deleteFav('<%= foods[x][0].idMeal %>')">Delete</button></td>
+                </tr>
+            <%}%>
+            <% }else{ %>
+                <tr>
+                    <td>No Results</td>
+                </tr>
+            <% } %>
+        </tbody>
+      </table>               
+</div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+// window.onload(location.reload());
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
+    function deleteFav(idMeal){
+        $.ajax({
+            type:'post',
+            data: { 'idMeal':idMeal },
+            url: 'http://localhost:8080/deleteList',
+    
+            complete:function(){
+              alert('Delete favourite')
+            //   location.reload();
+              window.location.href="http://localhost:8080/userList";
+            }
+        })
+    }
+</script>
