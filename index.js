@@ -109,6 +109,8 @@ express()
 .post('/search', function(req,res){
   var querystr = 'https://www.themealdb.com/api/json/v1/1/search.php?s='+req.body.search;
   axios.get(querystr).then((response)=>{
+
+    if(response['data']['meals'] != null){
     var temp = response['data']['meals'];
     var food = [];
     var foodie = [];
@@ -174,6 +176,12 @@ express()
       food: food,
       username: req.session.username
     });
+    }else{
+      res.render('pages/search',{
+        food: null,
+        username: req.session.username
+      });      
+    }
   });
 })
 

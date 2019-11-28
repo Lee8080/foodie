@@ -22,6 +22,7 @@
           </tr>
         </thead>
         <tbody>
+            <% if(food != null){ %>
             <%for(x=0;x<food.length;x++){%>
                 <tr>
                     <td><%= food[x][0].idMeal %></td>
@@ -41,6 +42,9 @@
                     <% } %>
                 </tr>
             <%}%>
+            <% }else{ %>
+                <td>No Results</td>
+            <% } %>
             
         </tbody>
       </table>               
